@@ -1,8 +1,10 @@
 'use client'
 
 import React from 'react';
+import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { Home, Compass, MessageSquare, Heart, PlusCircle, Settings, LogOut, Zap } from 'lucide-react';
+import { clearAuthTokens } from '@/lib/api';
 interface SidebarProps {
   activeTab: string;
   onTabChange: (tab: string) => void;
@@ -11,6 +13,11 @@ export function Sidebar({
   activeTab,
   onTabChange
 }: SidebarProps) {
+  const router = useRouter();
+  const handleSignOut = () => {
+    clearAuthTokens();
+    window.location.href = '/login';
+  };
   const menuItems = [{
     id: 'home',
     icon: Home,
@@ -71,7 +78,20 @@ export function Sidebar({
       <nav className="flex-1 px-4 space-y-2 overflow-y-auto">
         {menuItems.map(item => {
         const isActive = activeTab === item.id;
-        return <button key={item.id} onClick={() => onTabChange(item.id)} className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 group relative ${isActive ? 'bg-hotPink/10 text-hotPink' : 'text-lavender-muted hover:bg-purple-deep hover:text-white'}`}>
+        return <button key={item.id} onClick={() => {
+          const routeMap: Record<string, string> = {
+            home: '/',
+            explore: '/discover',
+            messages: '/account',
+            favorites: '/favorites',
+            create: '/create'
+          };
+          if (routeMap[item.id]) {
+            router.push(routeMap[item.id]);
+            return;
+          }
+          onTabChange(item.id);
+        }} className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 group relative ${isActive ? 'bg-hotPink/10 text-hotPink' : 'text-lavender-muted hover:bg-purple-deep hover:text-white'}`}>
               {isActive && <motion.div layoutId="activeNav" className="absolute left-0 w-1 h-6 bg-hotPink rounded-r-full" />}
               <item.icon className={`w-5 h-5 ${isActive ? 'stroke-[2.5px]' : 'stroke-2'}`} />
               <span className={`text-sm font-medium ${isActive ? 'font-semibold' : ''}`}>
@@ -86,11 +106,15 @@ export function Sidebar({
 
       {/* Bottom Navigation */}
       <div className="p-4 border-t border-lavender-faint space-y-2">
-        {bottomItems.map(item => <button key={item.id} className="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-lavender-muted hover:bg-purple-deep hover:text-white transition-colors">
+        {bottomItems.map(item => <button key={item.id} onClick={() => {
+        if (item.id === 'settings') {
+          router.push('/settings');
+        }
+      }} className="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-lavender-muted hover:bg-purple-deep hover:text-white transition-colors">
             <item.icon className="w-5 h-5" />
             <span className="text-sm font-medium">{item.label}</span>
           </button>)}
-        <button className="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-lavender-muted hover:bg-red-500/10 hover:text-red-400 transition-colors">
+        <button onClick={handleSignOut} className="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-lavender-muted hover:bg-red-500/10 hover:text-red-400 transition-colors">
           <LogOut className="w-5 h-5" />
           <span className="text-sm font-medium">Sign Out</span>
         </button>

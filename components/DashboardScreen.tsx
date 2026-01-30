@@ -1,61 +1,84 @@
 'use client'
 
-import React from 'react';
-import { motion } from 'framer-motion';
-import { AvatarScroll } from './AvatarScroll';
-import { ProfileCard } from './ProfileCard';
-import { Search, Filter, Bell } from 'lucide-react';
-const profiles = [{
-  id: 1,
-  name: 'Isabella',
-  age: 24,
-  bio: 'Art student by day, digital dreamer by night. I love deep conversations about philosophy and spontaneous adventures.',
-  image: 'https://images.unsplash.com/photo-1616002411355-49593fd89721?q=80&w=800&auto=format&fit=crop',
-  tags: ['Artistic', 'Playful'],
-  isNew: true
-}, {
-  id: 2,
-  name: 'Marcus',
-  age: 29,
-  bio: 'Fitness enthusiast and personal chef. Looking for someone to share healthy recipes and workout tips with.',
-  image: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=800&auto=format&fit=crop',
-  tags: ['Fitness', 'Cooking'],
-  isNew: false
-}, {
-  id: 3,
-  name: 'Sophia',
-  age: 26,
-  bio: "Tech entrepreneur building the future. When I'm not coding, I'm exploring virtual worlds.",
-  image: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=800&auto=format&fit=crop',
-  tags: ['Smart', 'Ambitious'],
-  isNew: true
-}, {
-  id: 4,
-  name: 'Aria',
-  age: 22,
-  bio: "Music producer and DJ. Let's make some noise and create beautiful harmonies together.",
-  image: 'https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?q=80&w=800&auto=format&fit=crop',
-  tags: ['Music', 'Creative'],
-  isNew: false
-}, {
-  id: 5,
-  name: 'Lucas',
-  age: 31,
-  bio: 'Architect with a passion for sustainable design. I appreciate structure, beauty, and intelligent design.',
-  image: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=800&auto=format&fit=crop',
-  tags: ['Design', 'Intellectual'],
-  isNew: false
-}, {
-  id: 6,
-  name: 'Eva',
-  age: 25,
-  bio: 'Fashion designer obsessed with textures and colors. I see the world as a canvas waiting to be painted.',
-  image: 'https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?q=80&w=800&auto=format&fit=crop',
-  tags: ['Fashion', 'Style'],
-  isNew: true
-}];
+import React, { useEffect, useMemo, useState } from 'react'
+import { AvatarScroll } from './AvatarScroll'
+import { ProfileCard } from './ProfileCard'
+import { ProfileDrawer } from './ProfileDrawer'
+import { Search, Filter, Bell } from 'lucide-react'
+import { api } from '@/lib/api'
+
+interface GirlProfile {
+  id: number
+  name: string
+  age: number
+  bio: string
+  story?: string
+  image_url: string
+  tags: Array<{ id: number; name: string }>
+  is_new: boolean
+  photos?: Array<{ id: number; image_url: string; sort_order: number }>
+}
+
 export function DashboardScreen() {
-  return <div className="min-h-screen bg-deep-900 text-lavender pb-20 md:pb-0 md:pl-64">
+  const [profiles, setProfiles] = useState<GirlProfile[]>([])
+  const [userName, setUserName] = useState<string | null>(null)
+  const [search, setSearch] = useState('')
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState<string | null>(null)
+  const [selectedProfile, setSelectedProfile] = useState<GirlProfile | null>(null)
+
+  useEffect(() => {
+    let isMounted = true
+    const loadGirls = async () => {
+      setLoading(true)
+      setError(null)
+      try {
+        const query = search ? `?search=${encodeURIComponent(search)}` : ''
+        const data = await api.get<GirlProfile[]>(`/girls/${query}`)
+        if (isMounted) setProfiles(data)
+      } catch (err) {
+        if (isMounted) setError('Failed to load profiles')
+      } finally {
+        if (isMounted) setLoading(false)
+      }
+    }
+
+    const handler = setTimeout(loadGirls, 300)
+    return () => {
+      isMounted = false
+      clearTimeout(handler)
+    }
+  }, [search])
+
+  useEffect(() => {
+    let isMounted = true
+    const loadMe = async () => {
+      try {
+        const data = await api.get<{ username: string }>('/auth/me/')
+        if (isMounted) setUserName(data.username)
+      } catch (err) {
+        if (isMounted) setUserName(null)
+      }
+    }
+    loadMe()
+    return () => {
+      isMounted = false
+    }
+  }, [])
+
+  const avatars = useMemo(
+    () =>
+      profiles.slice(0, 8).map((profile) => ({
+        id: profile.id,
+        name: profile.name,
+        imageUrl: profile.image_url,
+        isNew: profile.is_new,
+      })),
+    [profiles]
+  )
+
+  return (
+    <div className="min-h-screen bg-deep-900 text-lavender pb-20 md:pb-0 md:pl-64">
       {/* Mobile Header */}
       <header className="md:hidden sticky top-0 z-40 bg-deep-900/80 backdrop-blur-lg border-b border-lavender-faint px-4 py-3 flex items-center justify-between">
         <div className="flex items-center gap-2">
@@ -76,7 +99,7 @@ export function DashboardScreen() {
         <div className="hidden md:flex items-center justify-between mb-8">
           <div>
             <h1 className="text-3xl font-display font-bold text-white mb-1">
-              Good Evening, Alex
+              Good Evening{userName ? `, ${userName}` : ''}
             </h1>
             <p className="text-lavender-muted">
               Ready to connect with someone new?
@@ -85,7 +108,13 @@ export function DashboardScreen() {
           <div className="flex items-center gap-4">
             <div className="relative">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-lavender-muted" />
-              <input type="text" placeholder="Search personas..." className="bg-deep-800 border border-lavender-faint rounded-full pl-10 pr-4 py-2.5 text-sm text-white focus:outline-none focus:border-hotPink/50 focus:ring-1 focus:ring-hotPink/50 w-64 transition-all" />
+              <input
+                type="text"
+                placeholder="Search personas..."
+                value={search}
+                onChange={(event) => setSearch(event.target.value)}
+                className="bg-deep-800 border border-lavender-faint rounded-full pl-10 pr-4 py-2.5 text-sm text-white focus:outline-none focus:border-hotPink/50 focus:ring-1 focus:ring-hotPink/50 w-64 transition-all"
+              />
             </div>
             <button className="p-2.5 rounded-full bg-deep-800 border border-lavender-faint text-lavender hover:text-white hover:border-hotPink/50 transition-colors">
               <Filter className="w-4 h-4" />
@@ -94,6 +123,12 @@ export function DashboardScreen() {
               <Bell className="w-4 h-4" />
               <span className="absolute top-2 right-2.5 w-2 h-2 bg-hotPink rounded-full border border-deep-900" />
             </button>
+            <a
+              href="/account"
+              className="px-4 py-2.5 rounded-full bg-hotPink text-white text-sm font-medium shadow-lg shadow-hotPink/20"
+            >
+              Account
+            </a>
           </div>
         </div>
 
@@ -107,21 +142,55 @@ export function DashboardScreen() {
               View All
             </button>
           </div>
-          <AvatarScroll />
+          {avatars.length > 0 && <AvatarScroll avatars={avatars} />}
         </section>
 
         {/* Main Grid */}
         <section>
           <div className="flex items-center gap-4 mb-6 overflow-x-auto no-scrollbar pb-2">
-            {['Recommended', 'New Arrivals', 'Trending', 'Nearby'].map((tab, i) => <button key={tab} className={`px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-all ${i === 0 ? 'bg-hotPink text-white shadow-lg shadow-hotPink/20' : 'bg-deep-800 text-lavender-muted hover:bg-deep-800/80 hover:text-white border border-lavender-faint'}`}>
+            {['Recommended', 'New Arrivals', 'Trending', 'Nearby'].map(
+              (tab, i) => (
+                <button
+                  key={tab}
+                  className={`px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-all ${
+                    i === 0
+                      ? 'bg-hotPink text-white shadow-lg shadow-hotPink/20'
+                      : 'bg-deep-800 text-lavender-muted hover:bg-deep-800/80 hover:text-white border border-lavender-faint'
+                  }`}
+                >
                   {tab}
-                </button>)}
+                </button>
+              )
+            )}
           </div>
 
+          {loading && (
+            <div className="text-sm text-lavender-muted">Loading profiles...</div>
+          )}
+          {error && <div className="text-sm text-red-400">{error}</div>}
+
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {profiles.map((profile, index) => <ProfileCard key={profile.id} index={index} {...profile} />)}
+            {profiles.map((profile, index) => (
+              <ProfileCard
+                key={profile.id}
+                index={index}
+                name={profile.name}
+                age={profile.age}
+                bio={profile.bio}
+                image={profile.image_url}
+                tags={profile.tags.map((tag) => tag.name)}
+                isNew={profile.is_new}
+                girlId={profile.id}
+                onOpen={() => setSelectedProfile(profile)}
+              />
+            ))}
           </div>
         </section>
       </main>
-    </div>;
+      <ProfileDrawer
+        profile={selectedProfile}
+        onClose={() => setSelectedProfile(null)}
+      />
+    </div>
+  )
 }

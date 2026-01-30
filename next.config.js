@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  output: 'export',
+  output: process.env.NEXT_PUBLIC_STATIC_EXPORT === '1' ? 'export' : undefined,
   images: {
     unoptimized: true,
     domains: ['images.unsplash.com'],
@@ -11,4 +11,3 @@ const nextConfig = {
 }
 
 module.exports = nextConfig
-

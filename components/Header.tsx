@@ -48,7 +48,7 @@ export function Header() {
 
         {/* Desktop CTA */}
         <div className="hidden md:flex items-center gap-4">
-          <a href="#login" className="text-sm font-medium text-slate-300 hover:text-white transition-colors">
+          <a href="/login" className="text-sm font-medium text-slate-300 hover:text-white transition-colors">
             Log in
           </a>
           <Button variant="primary" size="sm">
@@ -79,9 +79,11 @@ export function Header() {
               </a>)}
           </nav>
           <div className="flex flex-col gap-4 pt-4 border-t border-slate-800">
-            <Button variant="outline" className="w-full justify-center">
-              Log in
-            </Button>
+            <a href="/login">
+              <Button variant="outline" className="w-full justify-center">
+                Log in
+              </Button>
+            </a>
             <Button variant="primary" className="w-full justify-center">
               Apply for Access
             </Button>
