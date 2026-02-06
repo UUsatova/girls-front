@@ -45,7 +45,7 @@ const messages = [
 
 export function ChatPreview() {
   return (
-    <section className="relative py-32 bg-black/90 overflow-hidden">
+    <section id="chat" className="relative py-16 bg-black/90 overflow-hidden">
       {/* Smooth transition gradient at top */}
       <div className="absolute top-0 left-0 right-0 h-64 bg-gradient-to-b from-black/80 via-black/50 via-black/30 via-black/10 to-transparent pointer-events-none z-0" />
       
@@ -67,27 +67,27 @@ export function ChatPreview() {
 
       {/* Cyberpunk glow effects - SIMPLIFIED */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute -left-20 -top-20 w-96 h-96 bg-[#ff0066]/10 rounded-full blur-xl" />
-        <div className="absolute right-20 top-20 w-80 h-80 bg-[#00ffff]/10 rounded-full blur-xl" />
-        <div className="absolute left-1/2 bottom-20 w-72 h-72 bg-[#ff0066]/10 rounded-full blur-xl" />
+        <div className="absolute -left-20 -top-20 w-96 h-96 bg-hotPink/10 rounded-full blur-xl" />
+        <div className="absolute right-20 top-20 w-80 h-80 bg-cyan/10 rounded-full blur-xl" />
+        <div className="absolute left-1/2 bottom-20 w-72 h-72 bg-hotPink/10 rounded-full blur-xl" />
       </div>
 
       <div className="container mx-auto px-6 relative z-10">
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4">
+          <h2 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold neon-glow-white mb-4">
             Real Conversations, Real Connection
           </h2>
-          <p className="text-[#cccccc] text-lg md:text-xl max-w-2xl mx-auto">
+          <p className="text-gray-light text-lg md:text-xl max-w-2xl mx-auto">
             Experience genuine understanding and acceptance in every message
           </p>
         </div>
 
         {/* Chat Interface */}
         <div className="max-w-4xl mx-auto">
-          <div className="relative rounded-2xl overflow-hidden border-2 border-[#ff0066]/50 bg-gradient-to-br from-black/90 via-[#1a0033]/90 to-black/90 shadow-2xl shadow-[#ff0066]/20">
+          <div className="relative rounded-2xl overflow-hidden border-2 border-hotPink/50 bg-gradient-to-br from-black/90 via-purple-dark/90 to-black/90 shadow-2xl shadow-hotPink/20">
             {/* Cyberpunk header */}
-            <div className="bg-gradient-to-r from-[#ff0066]/20 to-[#00ffff]/20 border-b border-[#ff0066]/50 p-4 flex items-center gap-4">
-              <div className="relative w-12 h-12 rounded-full overflow-hidden border-2 border-[#ff0066] ring-2 ring-[#ff0066]/50">
+            <div className="bg-gradient-to-r from-hotPink/20 to-cyan/20 border-b border-hotPink/50 p-4 flex items-center gap-4">
+              <div className="relative w-12 h-12 rounded-full overflow-hidden border-2 border-hotPink ring-2 ring-hotPink/50">
                 <Image
                   src="/images/girlAi1.png"
                   alt="AI Companion"
@@ -98,22 +98,22 @@ export function ChatPreview() {
               </div>
               <div className="flex-1">
                 <h3 className="text-white font-bold text-lg">Luna</h3>
-                <p className="text-[#00ffff] text-xs flex items-center gap-1">
-                  <span className="w-2 h-2 bg-[#00ffff] rounded-full"></span>
+                <p className="text-cyan text-xs flex items-center gap-1">
+                  <span className="w-2 h-2 bg-cyan rounded-full"></span>
                   Online
                 </p>
               </div>
             </div>
 
             {/* Chat messages */}
-            <div className="p-6 space-y-4 min-h-[500px] max-h-[600px] overflow-y-auto bg-gradient-to-b from-black/50 to-[#1a0033]/30">
+            <div className="p-6 space-y-4 min-h-[500px] max-h-[600px] overflow-y-auto bg-gradient-to-b from-black/50 to-purple-dark/30">
               {messages.map((message, index) => (
                 <div
                   key={message.id}
                   className={`flex gap-3 ${message.sender === 'user' ? 'justify-end' : 'justify-start'}`}
                 >
                   {message.sender === 'ai' && (
-                    <div className="relative w-10 h-10 rounded-full overflow-hidden border-2 border-[#ff0066] flex-shrink-0">
+                    <div className="relative w-10 h-10 rounded-full overflow-hidden border-2 border-hotPink flex-shrink-0">
                       <Image
                         src="/images/girlAi1.png"
                         alt="Luna"
@@ -128,22 +128,22 @@ export function ChatPreview() {
                     <div
                       className={`rounded-2xl px-4 py-3 ${
                         message.sender === 'user'
-                          ? 'bg-[#ff0066] text-white border border-[#ff0066]/50'
-                          : 'bg-black/60 text-white border border-[#00ffff]/30'
+                          ? 'bg-hotPink text-white border border-hotPink/50'
+                          : 'bg-black/60 text-white border border-cyan/30'
                       } shadow-lg`}
                     >
                       <p className="text-sm leading-relaxed">{message.text}</p>
                     </div>
                     <div className="flex items-center gap-2 mt-1">
                       {message.sender === 'user' && (
-                        <CheckCheck className="w-3 h-3 text-[#00ffff]" />
+                        <CheckCheck className="w-3 h-3 text-cyan" />
                       )}
-                      <span className="text-xs text-[#888888]">{message.time}</span>
+                      <span className="text-xs text-gray-medium">{message.time}</span>
                     </div>
                   </div>
 
                   {message.sender === 'user' && (
-                    <div className="relative w-10 h-10 rounded-full bg-gradient-to-br from-[#ff0066] to-[#00ffff] flex items-center justify-center flex-shrink-0 border-2 border-[#ff0066]">
+                    <div className="relative w-10 h-10 rounded-full bg-gradient-to-br from-hotPink to-cyan flex items-center justify-center flex-shrink-0 border-2 border-hotPink">
                       <span className="text-white font-bold text-sm">U</span>
                     </div>
                   )}
@@ -152,19 +152,19 @@ export function ChatPreview() {
             </div>
 
             {/* Input area */}
-            <div className="border-t border-[#ff0066]/30 bg-black/50 p-4">
+            <div className="border-t border-hotPink/30 bg-black/50 p-4">
               <div className="flex items-center gap-3">
                 <div className="flex-1 relative">
                   <input
                     type="text"
                     placeholder="Type your message..."
-                    className="w-full bg-black/60 border border-[#00ffff]/30 rounded-xl px-4 py-3 text-white placeholder-[#888888] focus:outline-none focus:border-[#ff0066] focus:ring-2 focus:ring-[#ff0066]/50 transition-all"
+                    className="w-full bg-black/60 border border-cyan/30 rounded-xl px-4 py-3 text-white placeholder-gray-medium focus:outline-none focus:border-hotPink focus:ring-2 focus:ring-hotPink/50 transition-all"
                     disabled
                   />
                 </div>
                 <button
                   disabled
-                  className="px-6 py-3 rounded-xl bg-gradient-to-r from-[#ff0066] to-[#00ffff] text-white font-semibold disabled:opacity-50 cursor-not-allowed"
+                  className="px-6 py-3 rounded-xl bg-gradient-to-r from-hotPink to-cyan text-white font-semibold disabled:opacity-50 cursor-not-allowed"
                 >
                   Send
                 </button>

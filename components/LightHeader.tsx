@@ -12,26 +12,35 @@ export function LightHeader() {
       initial={{ opacity: 0, y: -20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.6 }}
-      className="relative z-50 bg-black/20 border-b border-[#ff0066]/20"
+      className="relative z-50 bg-black border-b border-hotPink/20"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
         {/* Logo */}
-        <div className="flex items-center gap-2">
-          <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#ff0066] to-[#00ffff] flex items-center justify-center">
+        <div className="flex items-center gap-1">
+          <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-hotPink to-cyan flex items-center justify-center">
             <span className="text-white font-bold text-lg">E</span>
           </div>
           <span className="text-xl font-bold text-white hidden sm:inline">
-            EROS
+            ROS
           </span>
         </div>
 
         {/* Navigation */}
         <nav className="hidden md:flex items-center gap-6">
-          <a href="#features" className="text-sm text-[#cccccc] hover:text-white transition-colors">
+          <a href="#companions" className="text-sm text-gray-light hover:text-white transition-colors">
+            Companions
+          </a>
+          <a href="#philosophy" className="text-sm text-gray-light hover:text-white transition-colors">
             Features
           </a>
-          <a href="#companions" className="text-sm text-[#cccccc] hover:text-white transition-colors">
-            Companions
+          <a href="#chat" className="text-sm text-gray-light hover:text-white transition-colors">
+            Chat
+          </a>
+          <a href="#about" className="text-sm text-gray-light hover:text-white transition-colors">
+            About
+          </a>
+          <a href="#live-action" className="text-sm text-gray-light hover:text-white transition-colors">
+            Live Action
           </a>
         </nav>
 
@@ -39,7 +48,7 @@ export function LightHeader() {
         <div className="flex items-center gap-4">
           <button
             onClick={() => router.push('/login')}
-            className="px-4 py-2 rounded-lg bg-[#ff0066]/20 hover:bg-[#ff0066]/30 border border-[#ff0066]/50 text-white text-sm font-medium transition-all"
+            className="px-4 py-2 rounded-lg bg-hotPink/20 hover:bg-hotPink/30 border border-hotPink/50 text-white text-sm font-medium transition-all"
           >
             Login
           </button>

@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/Button';
 import { ArrowRight } from 'lucide-react';
 export function CTA() {
-  return <section className="py-32 relative overflow-hidden">
+  return <section className="py-16 relative overflow-hidden">
       <div className="absolute inset-0 bg-slate-900">
         <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1492551557933-34265f7af79e?q=80&w=2070&auto=format&fit=crop')] bg-cover bg-center opacity-10 mix-blend-overlay"></div>
         <div className="absolute inset-0 bg-gradient-to-t from-slate-900 via-slate-900/80 to-slate-900/40"></div>

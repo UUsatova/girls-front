@@ -5,6 +5,16 @@
 @tailwind utilities;
 
 @layer base {
+  :root {
+    --color-hotPink: #ff0066;
+    --color-hotPink-light: #ff4da6;
+    --color-cyan: #00ffff;
+    --color-gray-light: #cccccc;
+    --color-gray-medium: #888888;
+    --color-purple-dark: #1a0033;
+    --color-purple-deep: #2A1E5C;
+  }
+  
   html {
     font-family: 'Rajdhani', 'Orbitron', sans-serif;
     background-color: #0A0E1A;

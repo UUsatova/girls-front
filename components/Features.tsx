@@ -38,13 +38,12 @@ const features = [
 
 export function Features() {
   return (
-    <section className="py-32 bg-black relative overflow-hidden" id="philosophy">
+    <section className="py-16 bg-black relative overflow-hidden" id="philosophy">
       <div className="container mx-auto px-6">
         {/* Section Header */}
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4">
-            The Art of <br />
-            <span className="neon-glow-cyan-soft">Belonging</span>
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold neon-glow-white mb-4">
+            The Art of Belonging
           </h2>
         </div>
 
@@ -55,9 +54,8 @@ export function Features() {
             return (
               <div
                 key={index}
-                className="relative p-8 rounded-lg"
+                className="relative p-8 rounded-lg border border-hotPink/20"
                 style={{
-                  border: '1px solid rgba(255, 0, 102, 0.2)',
                   background: 'linear-gradient(135deg, rgba(6, 78, 96, 0.4) 0%, rgba(0, 0, 0, 0.6) 50%, rgba(6, 78, 96, 0.4) 100%)',
                   boxShadow: '0 0 20px rgba(255, 0, 102, 0.15), inset 0 0 20px rgba(255, 0, 102, 0.05)'
                 }}
@@ -65,18 +63,17 @@ export function Features() {
                 {/* Icon with soft cyan glow */}
                 <div className="mb-6 flex items-center justify-start">
                   <div 
-                    className="w-16 h-16 rounded-lg flex items-center justify-center relative"
+                    className="w-16 h-16 rounded-lg flex items-center justify-center relative bg-black/50"
                     style={{
-                      background: 'rgba(0, 0, 0, 0.5)',
                       boxShadow: '0 0 20px rgba(255, 0, 102, 0.5), inset 0 0 10px rgba(255, 0, 102, 0.2)'
                     }}
                   >
-                    <IconComponent className="w-8 h-8 text-[#ff0066] relative z-10" strokeWidth={1.5} />
+                    <IconComponent className="w-8 h-8 text-hotPink relative z-10" strokeWidth={1.5} />
                   </div>
                 </div>
 
                 {/* Title with soft cyan glow */}
-                <h3 className="text-2xl md:text-3xl font-bold mb-4 neon-glow-cyan-soft leading-tight">
+                <h3 className="text-2xl md:text-3xl font-bold mb-4 text-white/80 leading-tight">
                   {feature.title}
                 </h3>
 
@@ -87,9 +84,8 @@ export function Features() {
 
                 {/* Underline - subtle cyan */}
                 <div 
-                  className="h-0.5 w-20"
+                  className="h-0.5 w-20 bg-hotPink/80"
                   style={{
-                    background: 'rgba(255, 0, 102, 0.8)',
                     boxShadow: '0 0 10px rgba(255, 0, 102, 0.6)'
                   }}
                 />

@@ -14,22 +14,19 @@ module.exports = {
           800: '#151b2e', // Slightly lighter background
         },
         hotPink: {
-          DEFAULT: '#FF2079',
+          DEFAULT: '#ff0066', // Main hot pink
           hover: '#E61D6D',
+          light: '#ff4da6',
         },
         cyan: {
           DEFAULT: '#00ffff', // Cyberpunk cyan
-          hover: '#00DDEB',
+          hover: '#00ffff',
           50: '#00ffff',
           100: '#00ffff',
           200: '#00ffff',
           300: '#00ffff',
           400: '#00ffff',
           500: '#00ffff',
-          600: '#00DDEB',
-          700: '#00C4D1',
-          800: '#00A8B3',
-          900: '#008B94',
         },
         lavender: {
           DEFAULT: '#E6E6FF',
@@ -39,6 +36,11 @@ module.exports = {
         purple: {
           deep: '#2A1E5C',
           glass: 'rgba(42, 30, 92, 0.7)',
+          dark: '#1a0033',
+        },
+        gray: {
+          light: '#cccccc',
+          medium: '#888888',
         }
       },
       fontFamily: {
