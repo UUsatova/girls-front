@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { Home, Compass, MessageSquare, Heart, PlusCircle, Settings, LogOut, Zap } from 'lucide-react';
 import { clearAuthTokens } from '@/lib/api';
+import { Logo } from '@/components/Logo';
 interface SidebarProps {
   activeTab: string;
   onTabChange: (tab: string) => void;
@@ -53,13 +54,8 @@ export function Sidebar({
     opacity: 1
   }} className="hidden md:flex flex-col w-64 h-screen fixed left-0 top-0 bg-deep-900 border-r border-lavender-faint z-50">
       {/* Logo Area */}
-      <div className="p-6 flex items-center gap-3">
-        <div className="w-8 h-8 rounded-lg bg-hotPink flex items-center justify-center shadow-[0_0_15px_rgba(255,32,121,0.5)]">
-          <span className="font-display font-bold text-white text-lg">E</span>
-        </div>
-        <span className="font-display font-bold text-2xl tracking-tight text-white">
-          EROS
-        </span>
+      <div className="p-6">
+        <Logo variant="solid" textSize="lg" className="gap-3" />
       </div>
 
       {/* Premium Banner */}

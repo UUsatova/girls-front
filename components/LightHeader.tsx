@@ -3,6 +3,7 @@
 import React from 'react'
 import { motion } from 'framer-motion'
 import { useRouter } from 'next/navigation'
+import { Logo } from '@/components/Logo'
 
 export function LightHeader() {
   const router = useRouter()
@@ -16,14 +17,7 @@ export function LightHeader() {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
         {/* Logo */}
-        <div className="flex items-center gap-1">
-          <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-hotPink to-cyan flex items-center justify-center">
-            <span className="text-white font-bold text-lg">E</span>
-          </div>
-          <span className="text-xl font-bold text-white hidden sm:inline">
-            ROS
-          </span>
-        </div>
+        <Logo variant="gradient" />
 
         {/* Navigation */}
         <nav className="hidden md:flex items-center gap-6">
@@ -48,7 +42,7 @@ export function LightHeader() {
         <div className="flex items-center gap-4">
           <button
             onClick={() => router.push('/login')}
-            className="px-4 py-2 rounded-lg bg-hotPink/20 hover:bg-hotPink/30 border border-hotPink/50 text-white text-sm font-medium transition-all"
+            className="px-6 py-2.5 rounded-lg bg-gradient-to-r from-hotPink to-hotPink-light hover:from-hotPink-light hover:to-hotPink border border-hotPink text-white text-sm font-semibold transition-all shadow-lg shadow-hotPink/50 hover:shadow-hotPink/70 hover:scale-105 active:scale-95"
           >
             Login
           </button>
