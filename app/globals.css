@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;500;700&family=Inter:wght@300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&family=Quantico:wght@400;700&family=Share+Tech+Mono&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -6,13 +6,19 @@
 
 @layer base {
   html {
-    font-family: 'Inter', sans-serif;
+    font-family: 'Rajdhani', 'Orbitron', sans-serif;
     background-color: #0A0E1A;
     color: #E6E6FF;
   }
   
   h1, h2, h3, h4, h5, h6 {
-    font-family: 'DM Sans', sans-serif;
+    font-family: 'Orbitron', 'Quantico', sans-serif;
+    font-weight: 700;
+  }
+
+  /* Terminal font for numbers and codes */
+  code, .terminal, .mono {
+    font-family: 'Share Tech Mono', 'Courier New', monospace;
   }
 }
 
@@ -57,3 +63,174 @@
   scrollbar-width: none;
 }
 
+/* ============================================
+   CYBERPUNK 2026 VISUAL EFFECTS
+   ============================================ */
+
+/* Neon Glow 2.0 - SIMPLIFIED */
+.neon-glow {
+  color: #ff0066;
+  text-shadow: 
+    0 0 8px rgba(255, 0, 102, 0.8),
+    0 0 16px rgba(255, 0, 102, 0.6),
+    0 0 24px rgba(255, 0, 102, 0.4);
+  filter: drop-shadow(0 0 12px rgba(255, 0, 102, 0.7));
+}
+
+/* Bright Pink Neon Glow - ULTRA SIMPLIFIED for performance */
+.neon-glow-intense {
+  color: rgb(255, 0, 102);
+  text-shadow: 
+    0 0 10px rgba(255, 0, 102, 0.9),
+    0 0 20px rgba(255, 0, 102, 0.9),
+    0 0 40px rgba(255, 0, 102, 0.7),
+    0 0 60px rgba(255, 0, 102, 0.5);
+  filter: 
+    drop-shadow(0 0 8px rgba(255, 0, 102, 0.9))
+    drop-shadow(0 0 20px rgba(255, 0, 102, 0.8))
+    drop-shadow(0 0 40px rgba(255, 0, 102, 0.6));
+}
+
+/* .neon-glow::before - DISABLED for performance */
+
+.neon-glow-cyan {
+  color: #00ffff;
+  text-shadow: 
+    0 0 5px rgba(0, 255, 255, 0.5),
+    0 0 10px rgba(0, 255, 255, 0.8),
+    0 0 15px rgba(0, 255, 255, 0.6),
+    0 0 20px rgba(0, 255, 255, 0.4),
+    0 0 35px rgba(0, 255, 255, 0.3);
+  filter: 
+    drop-shadow(0 0 8px rgba(0, 255, 255, 0.8))
+    drop-shadow(0 0 16px rgba(0, 255, 255, 0.6));
+}
+
+/* White Neon Glow */
+.neon-glow-white {
+  color: #ffffff;
+  text-shadow: 
+    0 0 8px rgba(255, 0, 102, 0.9),
+    0 0 16px rgba(255, 0, 102, 0.9),
+    0 0 24px rgba(255, 0, 102, 0.9);
+  filter: drop-shadow(0 0 12px rgba(255, 0, 102, 0.9));
+}
+
+/* Soft Cyan Neon Glow - cyberpunk style */
+.neon-glow-cyan-soft {
+  color: #ffffff;
+  text-shadow: 
+    0 0 10px rgba(255, 0, 102, 0.6),
+    0 0 20px rgba(255, 0, 102, 0.5),
+    0 0 30px rgba(255, 0, 102, 0.4),
+    0 0 40px rgba(255, 0, 102, 0.3);
+  filter: 
+    drop-shadow(0 0 8px rgba(255, 0, 102, 0.6))
+    drop-shadow(0 0 16px rgba(255, 0, 102, 0.4))
+    drop-shadow(0 0 24px rgba(255, 0, 102, 0.3));
+}
+
+/* Bloom effect - SIMPLIFIED */
+.bloom {
+  filter: drop-shadow(0 0 8px rgba(255, 0, 102, 0.3));
+}
+
+/* Chromatic Aberration - DISABLED for performance */
+.chromatic-aberration {
+  /* Disabled to prevent page freezing */
+}
+
+/* Neon Border 2.0 - with soft glow and chromatic aberration */
+.neon-border {
+  border: 2px solid #ff0066;
+  position: relative;
+  box-shadow: 
+    0 0 5px rgba(255, 0, 102, 0.5),
+    0 0 10px rgba(255, 0, 102, 0.4),
+    0 0 20px rgba(255, 0, 102, 0.3),
+    0 0 40px rgba(255, 0, 102, 0.2),
+    inset 0 0 10px rgba(255, 0, 102, 0.1);
+}
+
+.neon-border::before {
+  /* Disabled animation for performance */
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: rgba(255, 0, 102, 0.3);
+  z-index: -1;
+  filter: blur(6px);
+  opacity: 0.5;
+}
+
+/* Asymmetric corners - OPTIMIZED (no 3D transforms) */
+.skewed-card {
+  clip-path: polygon(
+    2% 0%,
+    98% 0%,
+    100% 3%,
+    100% 97%,
+    98% 100%,
+    2% 100%,
+    0% 97%,
+    0% 3%
+  );
+  /* Removed 3D transforms for performance */
+}
+
+.skewed-card-alt {
+  clip-path: polygon(
+    0% 2%,
+    3% 0%,
+    97% 0%,
+    100% 2%,
+    100% 98%,
+    97% 100%,
+    3% 100%,
+    0% 98%
+  );
+  /* Removed 3D transforms for performance */
+}
+
+/* Glitch effect - DISABLED for performance */
+.glitch {
+  position: relative;
+}
+
+/* Glitch on hover - OPTIMIZED - simple transform only */
+.glitch-hover:hover {
+  transform: translate(1px, -1px);
+  transition: transform 0.1s ease;
+}
+
+/* Scanline effect - DISABLED for performance */
+.scanline {
+  /* Disabled to prevent page freezing */
+}
+
+/* Scanline on loading/transitions - DISABLED */
+.scanline-active {
+  /* Disabled to prevent page freezing */
+}
+
+/* Gradient shimmer animation */
+@keyframes gradient-shimmer {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.gradient-shimmer {
+  background: linear-gradient(135deg, #ff0066, #00ffff, #ff0066);
+  background-size: 200% 200%;
+  animation: gradient-shimmer 3s ease infinite;
+}

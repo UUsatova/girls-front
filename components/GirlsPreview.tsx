@@ -1,7 +1,6 @@
 'use client'
 
 import React from 'react'
-import { motion } from 'framer-motion'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
 import { Sparkles, MessageCircle } from 'lucide-react'
@@ -67,7 +66,7 @@ export function GirlsPreview() {
   const router = useRouter()
 
   return (
-    <section className="relative py-32 bg-black/80 backdrop-blur-sm overflow-hidden">
+    <section className="relative py-32 bg-black/80 overflow-hidden">
       {/* Smooth transition gradient at top */}
       <div className="absolute top-0 left-0 right-0 h-64 bg-gradient-to-b from-black/80 via-black/50 via-black/30 via-black/10 to-transparent pointer-events-none z-0" />
       
@@ -86,33 +85,23 @@ export function GirlsPreview() {
       </div>
 
       <div className="container mx-auto px-6 relative z-10">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          className="text-center mb-16"
-        >
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold neon-glow mb-4">
+        <div className="text-center mb-16">
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold neon-glow-white mb-4">
             Meet Your Companions
           </h2>
           <p className="text-[#cccccc] text-lg md:text-xl max-w-2xl mx-auto">
             Choose from our curated selection of AI companions
           </p>
-        </motion.div>
+        </div>
 
         {/* Girls Grid - 3 cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
           {girls.map((girl, index) => (
-            <motion.div
+            <div
               key={girl.id}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: index * 0.15 }}
               className="group relative"
             >
-              <div className="overflow-hidden aspect-[3/4] w-full">
+              <div className="overflow-hidden aspect-[3/4] w-full skewed-card-alt glitch-hover">
                 {/* Image */}
                 <div className="relative w-full h-full">
                   <Image
@@ -128,7 +117,7 @@ export function GirlsPreview() {
                   
                   {/* New Badge */}
                   {girl.isNew && (
-                    <div className="absolute top-4 left-4 px-3 py-1.5 bg-[#ff0066]/90 backdrop-blur-sm rounded-lg flex items-center gap-1.5 shadow-lg shadow-[#ff0066]/30 z-10">
+                    <div className="absolute top-4 left-4 px-3 py-1.5 bg-[#ff0066]/90 rounded-lg flex items-center gap-1.5 shadow-lg shadow-[#ff0066]/30 z-10">
                       <Sparkles className="w-3.5 h-3.5 text-white" />
                       <span className="text-[10px] font-bold uppercase tracking-wider text-white">
                         New
@@ -140,10 +129,10 @@ export function GirlsPreview() {
                   <div className="absolute bottom-0 left-0 right-0 p-6 flex flex-col gap-3">
                     <div>
                       <div className="flex items-baseline gap-2 mb-2">
-                        <h3 className="text-2xl md:text-3xl font-bold text-white neon-glow">
+                        <h3 className="text-2xl md:text-3xl font-bold text-white font-heading">
                           {girl.name}
                         </h3>
-                        <span className="text-lg font-light text-[#cccccc]">
+                        <span className="text-lg font-light text-[#cccccc] font-mono">
                           {girl.age}
                         </span>
                       </div>
@@ -157,7 +146,7 @@ export function GirlsPreview() {
                       {girl.tags.map((tag, i) => (
                         <span
                           key={i}
-                          className="text-[10px] uppercase tracking-wider px-2.5 py-1 rounded-md bg-[#ff0066]/20 border border-[#ff0066]/40 text-[#ff0066] neon-glow"
+                          className="text-[10px] uppercase tracking-wider px-2.5 py-1 rounded-md bg-[#ff0066]/20 border border-[#ff0066]/40 text-[#ff0066]"
                         >
                           {tag}
                         </span>
@@ -171,7 +160,7 @@ export function GirlsPreview() {
                           e.stopPropagation()
                           router.push('/login')
                         }}
-                        className="w-full flex items-center justify-center gap-2 py-2.5 rounded-xl bg-[#ff0066] text-white font-medium text-sm shadow-lg shadow-[#ff0066]/30 neon-glow"
+                        className="w-full flex items-center justify-center gap-2 py-2.5 rounded-xl bg-[#ff0066] text-white font-medium text-sm shadow-lg shadow-[#ff0066]/30"
                       >
                         <MessageCircle className="w-4 h-4" />
                         <span>Chat</span>
@@ -180,7 +169,7 @@ export function GirlsPreview() {
                   </div>
                 </div>
               </div>
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>

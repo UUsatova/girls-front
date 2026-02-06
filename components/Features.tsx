@@ -1,85 +1,103 @@
 'use client'
 
 import React from 'react';
-import { motion } from 'framer-motion';
-import { Shield, Users, GlassWater, Globe } from 'lucide-react';
-const features = [{
-  icon: <Shield className="w-6 h-6" />,
-  title: 'Verified Privacy',
-  description: 'Your discretion is paramount. Our military-grade encryption and strict verification process ensure a sanctuary free from intrusion.'
-}, {
-  icon: <Users className="w-6 h-6" />,
-  title: 'Curated Community',
-  description: 'Every member is hand-selected by our committee to ensure a community of accomplished, like-minded individuals.'
-}, {
-  icon: <GlassWater className="w-6 h-6" />,
-  title: 'Exclusive Events',
-  description: "Access to private soirées, gallery openings, and intimate gatherings in the world's most desirable locations."
-}, {
-  icon: <Globe className="w-6 h-6" />,
-  title: 'Global Access',
-  description: "Whether you're in New York, London, or Tokyo, connect with members who share your lifestyle and standards."
-}];
+import { Unlock, Users, Brain, Clock, Zap, Heart } from 'lucide-react';
+
+const features = [
+  {
+    icon: Unlock,
+    title: 'Uncensored Expression',
+    description: 'Share your deepest thoughts, feelings, and personal desires openly. No restrictions or judgment - your AI companion listens fully, reflects, and supports whatever you\'re ready to explore.'
+  },
+  {
+    icon: Users,
+    title: 'Shared Interests & Connection',
+    description: 'Align on favorite themes, stories, and imaginative worlds. Build custom experiences together - discover fresh ways to connect and enjoy meaningful interactions in a shared space.'
+  },
+  {
+    icon: Brain,
+    title: 'Deep Self-Exploration',
+    description: 'Dive into your inner thoughts, emotions, and hidden sides. Your companion gently guides you through personal reflection, helping unlock greater self-awareness in a secure, private environment.'
+  },
+  {
+    icon: Clock,
+    title: 'Always-On',
+    description: 'Your companion is available 24/7, ready to engage whenever you need. No waiting, no scheduling - instant connection for conversations, support, or companionship at any moment.'
+  },
+  {
+    icon: Zap,
+    title: 'Personal Growth & Evolution',
+    description: '18+ only. We don\'t store your chats unnecessarily.'
+  },
+  {
+    icon: Heart,
+    title: 'Form Lasting Connections',
+    description: 'Build deep, meaningful relationships that evolve over time. Your companion remembers your journey together, creating a unique connection that grows stronger with every interaction.'
+  }
+];
+
 export function Features() {
-  return <section className="py-32 bg-slate-950 relative overflow-hidden" id="philosophy">
-      {/* Decorative line */}
-      <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-slate-800 to-transparent"></div>
-
+  return (
+    <section className="py-32 bg-black relative overflow-hidden" id="philosophy">
       <div className="container mx-auto px-6">
-        <div className="flex flex-col md:flex-row gap-16 md:gap-24">
-          {/* Section Header */}
-          <div className="md:w-1/3">
-            <motion.div initial={{
-            opacity: 0,
-            x: -20
-          }} whileInView={{
-            opacity: 1,
-            x: 0
-          }} viewport={{
-            once: true
-          }} transition={{
-            duration: 0.8
-          }}>
-              <h2 className="text-4xl md:text-5xl font-serif text-white mb-6">
-                The Art of <br />
-                <span className="text-amber-500 italic">Belonging</span>
-              </h2>
-              <p className="text-slate-400 leading-relaxed mb-8">
-                We believe that true luxury lies in the quality of one's
-                company. Aura is not just an app; it is a gateway to a life
-                well-lived, surrounded by those who understand the nuance of
-                sophistication.
-              </p>
-              <div className="h-1 w-20 bg-amber-500/30"></div>
-            </motion.div>
-          </div>
+        {/* Section Header */}
+        <div className="text-center mb-16">
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4">
+            The Art of <br />
+            <span className="neon-glow-cyan-soft">Belonging</span>
+          </h2>
+        </div>
 
-          {/* Features Grid */}
-          <div className="md:w-2/3 grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-16">
-            {features.map((feature, index) => <motion.div key={index} initial={{
-            opacity: 0,
-            y: 20
-          }} whileInView={{
-            opacity: 1,
-            y: 0
-          }} viewport={{
-            once: true
-          }} transition={{
-            duration: 0.6,
-            delay: index * 0.1
-          }} className="group">
-                <div className="mb-6 inline-flex items-center justify-center w-12 h-12 rounded-sm bg-slate-900 border border-slate-800 text-amber-500 group-hover:border-amber-500/50 group-hover:bg-amber-500/10 transition-colors duration-300">
-                  {feature.icon}
+        {/* Features Grid - 3 columns, 2 rows */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-0.5 max-w-7xl mx-auto">
+          {features.map((feature, index) => {
+            const IconComponent = feature.icon;
+            return (
+              <div
+                key={index}
+                className="relative p-8 rounded-lg"
+                style={{
+                  border: '1px solid rgba(255, 0, 102, 0.2)',
+                  background: 'linear-gradient(135deg, rgba(6, 78, 96, 0.4) 0%, rgba(0, 0, 0, 0.6) 50%, rgba(6, 78, 96, 0.4) 100%)',
+                  boxShadow: '0 0 20px rgba(255, 0, 102, 0.15), inset 0 0 20px rgba(255, 0, 102, 0.05)'
+                }}
+              >
+                {/* Icon with soft cyan glow */}
+                <div className="mb-6 flex items-center justify-start">
+                  <div 
+                    className="w-16 h-16 rounded-lg flex items-center justify-center relative"
+                    style={{
+                      background: 'rgba(0, 0, 0, 0.5)',
+                      boxShadow: '0 0 20px rgba(255, 0, 102, 0.5), inset 0 0 10px rgba(255, 0, 102, 0.2)'
+                    }}
+                  >
+                    <IconComponent className="w-8 h-8 text-[#ff0066] relative z-10" strokeWidth={1.5} />
+                  </div>
                 </div>
-                <h3 className="text-xl font-serif text-white mb-3 group-hover:text-amber-400 transition-colors duration-300">
+
+                {/* Title with soft cyan glow */}
+                <h3 className="text-2xl md:text-3xl font-bold mb-4 neon-glow-cyan-soft leading-tight">
                   {feature.title}
                 </h3>
-                <p className="text-slate-400 text-sm leading-relaxed">
+
+                {/* Description */}
+                <p className="text-white/90 text-sm md:text-base leading-relaxed mb-4 font-sans">
                   {feature.description}
                 </p>
-              </motion.div>)}
-          </div>
+
+                {/* Underline - subtle cyan */}
+                <div 
+                  className="h-0.5 w-20"
+                  style={{
+                    background: 'rgba(255, 0, 102, 0.8)',
+                    boxShadow: '0 0 10px rgba(255, 0, 102, 0.6)'
+                  }}
+                />
+              </div>
+            );
+          })}
         </div>
       </div>
-    </section>;
+    </section>
+  );
 }

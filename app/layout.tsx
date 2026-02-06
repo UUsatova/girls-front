@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import './globals.css'
 
 export const metadata: Metadata = {
-  title: 'Eros - Adult App Design',
+  title: 'Eros',
   description: 'Curated connections for the exceptional',
 }
 
