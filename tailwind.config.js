@@ -18,8 +18,18 @@ module.exports = {
           hover: '#E61D6D',
         },
         cyan: {
-          DEFAULT: '#00DDEB',
-          hover: '#00C4D1',
+          DEFAULT: '#00ffff', // Cyberpunk cyan
+          hover: '#00DDEB',
+          50: '#00ffff',
+          100: '#00ffff',
+          200: '#00ffff',
+          300: '#00ffff',
+          400: '#00ffff',
+          500: '#00ffff',
+          600: '#00DDEB',
+          700: '#00C4D1',
+          800: '#00A8B3',
+          900: '#008B94',
         },
         lavender: {
           DEFAULT: '#E6E6FF',

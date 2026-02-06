@@ -1,7 +1,6 @@
 'use client'
 
 import React from 'react'
-import { motion } from 'framer-motion'
 
 const textContent = [
   'Eros AI turns every interaction into an intensely personal and passionate experience with advanced AI companions that adapt to you, remember your every preference and fantasy, and evolve over time for the most natural, vivid, and uncensored conversations.',
@@ -14,7 +13,7 @@ const textContent = [
 
 export function AboutSection() {
   return (
-    <section className="relative py-32 bg-black/80 backdrop-blur-sm overflow-hidden">
+    <section className="relative py-32 bg-black/80 overflow-hidden">
       {/* Smooth transition gradient at top */}
       <div className="absolute top-0 left-0 right-0 h-64 bg-gradient-to-b from-black/80 via-black/50 via-black/30 via-black/10 to-transparent pointer-events-none z-0" />
       
@@ -33,28 +32,18 @@ export function AboutSection() {
       </div>
 
       <div className="container mx-auto px-6 relative z-10">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          className="max-w-4xl mx-auto"
-        >
+        <div className="max-w-4xl mx-auto">
           <div className="space-y-6 text-[#cccccc] text-base md:text-lg leading-relaxed">
             {textContent.map((text, index) => (
-              <motion.p
+              <p
                 key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
                 className="text-justify"
               >
                 {text}
-              </motion.p>
+              </p>
             ))}
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   )

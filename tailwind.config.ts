@@ -21,7 +21,11 @@ const config: Config = {
         'purple-deep': '#2A1E5C',
       },
       fontFamily: {
-        display: ['Orbitron', 'Arial', 'sans-serif'],
+        sans: ['Rajdhani', 'sans-serif'],
+        display: ['Orbitron', 'sans-serif'],
+        heading: ['Quantico', 'Orbitron', 'sans-serif'],
+        mono: ['Share Tech Mono', 'Courier New', 'monospace'],
+        terminal: ['Share Tech Mono', 'OCR-A', 'monospace'],
       },
     },
   },

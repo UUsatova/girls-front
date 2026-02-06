@@ -6,11 +6,20 @@ import { DashboardScreen } from '@/components/DashboardScreen'
 import { MenuScreen } from '@/components/MenuScreen'
 import { Menu } from 'lucide-react'
 import { api } from '@/lib/api'
+import HeroSection from '@/components/HeroSection'
+import FooterText from '@/components/FooterText'
+import { Features } from '@/components/Features'
+import { GirlsPreview } from '@/components/GirlsPreview'
+import { AboutSection } from '@/components/AboutSection'
+import { ChatPreview } from '@/components/ChatPreview'
+import { LiveActionBanner } from '@/components/LiveActionBanner'
+import { LightHeader } from '@/components/LightHeader'
 
 export default function Home() {
   const [activeTab, setActiveTab] = useState('home')
   const [showMobileMenu, setShowMobileMenu] = useState(false)
-  const [isAuthed, setIsAuthed] = useState(true)
+  const [isAuthed, setIsAuthed] = useState<boolean | null>(null)
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     let mounted = true
@@ -20,6 +29,8 @@ export default function Home() {
         if (mounted) setIsAuthed(true)
       } catch {
         if (mounted) setIsAuthed(false)
+      } finally {
+        if (mounted) setLoading(false)
       }
     }
     checkAuth()
@@ -28,15 +39,30 @@ export default function Home() {
     }
   }, [])
 
+  // Show loading state
+  if (loading || isAuthed === null) {
+    return <div className="min-h-screen bg-deep-900 text-white flex items-center justify-center">Loading...</div>
+  }
+
+  // Show landing page if not authenticated
+  if (!isAuthed) {
+    return (
+      <main className="relative min-h-screen overflow-x-visible text-white bg-transparent">
+        <LightHeader />
+        <HeroSection />
+        <GirlsPreview />
+        <Features />
+        <ChatPreview />
+        <AboutSection />
+        <LiveActionBanner />
+        <FooterText />
+      </main>
+    )
+  }
+
+  // Show dashboard if authenticated
   return (
     <div className="min-h-screen bg-deep-900 text-white font-sans selection:bg-hotPink selection:text-white">
-      {!isAuthed && (
-        <div className="md:pl-64 p-4 md:p-6">
-          <div className="rounded-2xl border border-lavender-faint bg-deep-800 p-6 text-sm text-lavender-muted">
-            You are not signed in. Go to <a href="/login" className="text-hotPink underline">login</a> to access chats.
-          </div>
-        </div>
-      )}
       {/* Desktop Sidebar */}
       <Sidebar activeTab={activeTab} onTabChange={setActiveTab} />
 

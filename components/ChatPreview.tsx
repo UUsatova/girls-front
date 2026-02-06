@@ -1,7 +1,6 @@
 'use client'
 
 import React from 'react'
-import { motion } from 'framer-motion'
 import Image from 'next/image'
 import { CheckCheck } from 'lucide-react'
 
@@ -46,7 +45,7 @@ const messages = [
 
 export function ChatPreview() {
   return (
-    <section className="relative py-32 bg-black/90 backdrop-blur-sm overflow-hidden">
+    <section className="relative py-32 bg-black/90 overflow-hidden">
       {/* Smooth transition gradient at top */}
       <div className="absolute top-0 left-0 right-0 h-64 bg-gradient-to-b from-black/80 via-black/50 via-black/30 via-black/10 to-transparent pointer-events-none z-0" />
       
@@ -66,38 +65,26 @@ export function ChatPreview() {
         />
       </div>
 
-      {/* Cyberpunk glow effects */}
+      {/* Cyberpunk glow effects - SIMPLIFIED */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute -left-20 -top-20 w-96 h-96 bg-[#ff0066]/10 rounded-full blur-3xl" />
-        <div className="absolute right-20 top-20 w-80 h-80 bg-[#00ffff]/10 rounded-full blur-3xl" />
-        <div className="absolute left-1/2 bottom-20 w-72 h-72 bg-[#ff0066]/10 rounded-full blur-3xl" />
+        <div className="absolute -left-20 -top-20 w-96 h-96 bg-[#ff0066]/10 rounded-full blur-xl" />
+        <div className="absolute right-20 top-20 w-80 h-80 bg-[#00ffff]/10 rounded-full blur-xl" />
+        <div className="absolute left-1/2 bottom-20 w-72 h-72 bg-[#ff0066]/10 rounded-full blur-xl" />
       </div>
 
       <div className="container mx-auto px-6 relative z-10">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          className="text-center mb-16"
-        >
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold neon-glow mb-4">
+        <div className="text-center mb-16">
+          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4">
             Real Conversations, Real Connection
           </h2>
           <p className="text-[#cccccc] text-lg md:text-xl max-w-2xl mx-auto">
             Experience genuine understanding and acceptance in every message
           </p>
-        </motion.div>
+        </div>
 
         {/* Chat Interface */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className="max-w-4xl mx-auto"
-        >
-          <div className="relative rounded-2xl overflow-hidden border-2 border-[#ff0066]/50 bg-gradient-to-br from-black/90 via-[#1a0033]/90 to-black/90 backdrop-blur-md shadow-2xl shadow-[#ff0066]/20">
+        <div className="max-w-4xl mx-auto">
+          <div className="relative rounded-2xl overflow-hidden border-2 border-[#ff0066]/50 bg-gradient-to-br from-black/90 via-[#1a0033]/90 to-black/90 shadow-2xl shadow-[#ff0066]/20">
             {/* Cyberpunk header */}
             <div className="bg-gradient-to-r from-[#ff0066]/20 to-[#00ffff]/20 border-b border-[#ff0066]/50 p-4 flex items-center gap-4">
               <div className="relative w-12 h-12 rounded-full overflow-hidden border-2 border-[#ff0066] ring-2 ring-[#ff0066]/50">
@@ -110,9 +97,9 @@ export function ChatPreview() {
                 />
               </div>
               <div className="flex-1">
-                <h3 className="text-white font-bold text-lg neon-glow">Luna</h3>
+                <h3 className="text-white font-bold text-lg">Luna</h3>
                 <p className="text-[#00ffff] text-xs flex items-center gap-1">
-                  <span className="w-2 h-2 bg-[#00ffff] rounded-full animate-pulse"></span>
+                  <span className="w-2 h-2 bg-[#00ffff] rounded-full"></span>
                   Online
                 </p>
               </div>
@@ -121,12 +108,8 @@ export function ChatPreview() {
             {/* Chat messages */}
             <div className="p-6 space-y-4 min-h-[500px] max-h-[600px] overflow-y-auto bg-gradient-to-b from-black/50 to-[#1a0033]/30">
               {messages.map((message, index) => (
-                <motion.div
+                <div
                   key={message.id}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.4, delay: index * 0.1 }}
                   className={`flex gap-3 ${message.sender === 'user' ? 'justify-end' : 'justify-start'}`}
                 >
                   {message.sender === 'ai' && (
@@ -146,7 +129,7 @@ export function ChatPreview() {
                       className={`rounded-2xl px-4 py-3 ${
                         message.sender === 'user'
                           ? 'bg-[#ff0066] text-white border border-[#ff0066]/50'
-                          : 'bg-black/60 text-white border border-[#00ffff]/30 backdrop-blur-sm'
+                          : 'bg-black/60 text-white border border-[#00ffff]/30'
                       } shadow-lg`}
                     >
                       <p className="text-sm leading-relaxed">{message.text}</p>
@@ -164,7 +147,7 @@ export function ChatPreview() {
                       <span className="text-white font-bold text-sm">U</span>
                     </div>
                   )}
-                </motion.div>
+                </div>
               ))}
             </div>
 
@@ -181,14 +164,14 @@ export function ChatPreview() {
                 </div>
                 <button
                   disabled
-                  className="px-6 py-3 rounded-xl bg-gradient-to-r from-[#ff0066] to-[#00ffff] text-white font-semibold disabled:opacity-50 cursor-not-allowed neon-glow"
+                  className="px-6 py-3 rounded-xl bg-gradient-to-r from-[#ff0066] to-[#00ffff] text-white font-semibold disabled:opacity-50 cursor-not-allowed"
                 >
                   Send
                 </button>
               </div>
             </div>
           </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   )
