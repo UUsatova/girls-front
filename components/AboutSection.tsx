@@ -13,7 +13,7 @@ const textContent = [
 
 export function AboutSection() {
   return (
-    <section className="relative py-32 bg-black/80 overflow-hidden">
+    <section id="about" className="relative py-16 bg-black/80 overflow-hidden">
       {/* Smooth transition gradient at top */}
       <div className="absolute top-0 left-0 right-0 h-64 bg-gradient-to-b from-black/80 via-black/50 via-black/30 via-black/10 to-transparent pointer-events-none z-0" />
       
@@ -33,7 +33,7 @@ export function AboutSection() {
 
       <div className="container mx-auto px-6 relative z-10">
         <div className="max-w-4xl mx-auto">
-          <div className="space-y-6 text-[#cccccc] text-base md:text-lg leading-relaxed">
+          <div className="space-y-6 text-gray-light text-base md:text-lg leading-relaxed">
             {textContent.map((text, index) => (
               <p
                 key={index}

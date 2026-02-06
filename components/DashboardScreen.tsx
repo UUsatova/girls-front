@@ -6,6 +6,7 @@ import { ProfileCard } from './ProfileCard'
 import { ProfileDrawer } from './ProfileDrawer'
 import { Search, Filter, Bell } from 'lucide-react'
 import { api } from '@/lib/api'
+import { Logo } from '@/components/Logo'
 
 interface GirlProfile {
   id: number
@@ -81,14 +82,7 @@ export function DashboardScreen() {
     <div className="min-h-screen bg-deep-900 text-lavender pb-20 md:pb-0 md:pl-64">
       {/* Mobile Header */}
       <header className="md:hidden sticky top-0 z-40 bg-deep-900/80 backdrop-blur-lg border-b border-lavender-faint px-4 py-3 flex items-center justify-between">
-        <div className="flex items-center gap-2">
-          <div className="w-8 h-8 rounded-lg bg-hotPink flex items-center justify-center">
-            <span className="font-display font-bold text-white">E</span>
-          </div>
-          <span className="font-display font-bold text-lg text-white">
-            EROS
-          </span>
-        </div>
+        <Logo variant="solid" textSize="sm" className="gap-2" />
         <button className="p-2 text-lavender hover:text-white">
           <Bell className="w-5 h-5" />
         </button>

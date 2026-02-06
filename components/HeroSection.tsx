@@ -7,13 +7,13 @@ export default function HeroSection() {
   const router = useRouter()
 
   return (
-    <section className="relative flex min-h-screen flex-col items-center justify-start px-4 sm:px-6 lg:px-8 text-center pt-24">
+    <section className="relative flex min-h-screen flex-col items-center justify-start px-4 sm:px-6 lg:px-8 text-center pt-24 bg-black">
       {/* Vignette overlay */}
       <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_center,_transparent_40%,_black_100%)] opacity-70" />
 
       {/* 18+ badge - at the top right */}
       <div className="absolute top-4 right-4 z-20">
-        <div className="flex items-center gap-2 rounded-full bg-[#ff0066]/90 px-3 py-1 text-xs font-semibold uppercase tracking-wide shadow-lg">
+        <div className="flex items-center gap-2 rounded-full bg-hotPink/90 px-3 py-1 text-xs font-semibold uppercase tracking-wide shadow-lg">
           <span className="flex h-6 w-6 items-center justify-center rounded-full bg-black/40 text-white text-[0.7rem]">
             18+
           </span>
@@ -36,10 +36,10 @@ export default function HeroSection() {
       </div>
 
       {/* Main content - on top of image */}
-      <div className="relative z-10 max-w-5xl w-full flex flex-col items-center justify-center gap-8 lg:gap-12 mt-8">
+      <div className="relative z-10 max-w-5xl w-full flex flex-col items-center justify-center gap-8 lg:gap-12 mt-8 md:mt-12 lg:mt-16">
         {/* Text content - centered at top */}
         <div className="w-full text-center">
-          <h1 className="text-balance neon-glow-white text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-normal leading-normal">
+          <h1 className="text-balance neon-glow-white text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-normal leading-normal">
             Your private AI companion. No censorship. No judgment.
           </h1>
 
@@ -51,7 +51,7 @@ export default function HeroSection() {
             <button
               type="button"
               onClick={() => router.push('/login')}
-              className="gradient-shimmer skewed-card min-w-[280px] px-10 py-4 text-lg font-semibold text-white transition-all relative overflow-hidden hover:scale-105 active:scale-95 border-none shadow-lg shadow-[#ff0066]/50"
+              className="gradient-shimmer skewed-card min-w-[280px] px-10 py-4 text-lg font-semibold text-white transition-all relative overflow-hidden hover:scale-105 active:scale-95 border-none shadow-lg shadow-hotPink/50"
             >
               <span className="relative z-10">Start for free</span>
             </button>
@@ -60,7 +60,7 @@ export default function HeroSection() {
       </div>
       
       {/* Smooth transition gradient at bottom */}
-      <div className="absolute bottom-0 left-0 right-0 h-64 bg-gradient-to-b from-transparent via-black/10 via-black/30 via-black/50 to-black/80 pointer-events-none z-0" />
+      <div className="absolute bottom-0 left-0 right-0 h-48 bg-gradient-to-b from-transparent via-black/20 via-black/40 via-black/60 via-black/80 to-black pointer-events-none z-10" />
     </section>
   )
 }
