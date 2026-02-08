@@ -32,6 +32,8 @@ export function clearAuthTokens() {
   setRefreshToken(null)
 }
 
+const AUTH_FREE_PATHS = ['/auth/login/', '/auth/register/', '/auth/refresh/']
+
 async function request<T>(
   path: string,
   options: RequestInit = {}
@@ -41,7 +43,7 @@ async function request<T>(
   if (!headers.has('Content-Type') && options.body) {
     headers.set('Content-Type', 'application/json')
   }
-  if (token) {
+  if (token && !AUTH_FREE_PATHS.some((p) => path.startsWith(p))) {
     headers.set('Authorization', `Bearer ${token}`)
   }
 
@@ -49,6 +51,11 @@ async function request<T>(
     ...options,
     headers,
   })
+
+  if (response.status === 401 && !AUTH_FREE_PATHS.some((p) => path.startsWith(p))) {
+    setAccessToken(null)
+    setRefreshToken(null)
+  }
 
   if (!response.ok) {
     const text = await response.text()
