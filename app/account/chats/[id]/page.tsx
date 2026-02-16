@@ -99,10 +99,10 @@ export default function ChatDetailPage() {
             className="w-12 h-12 rounded-full object-cover"
           />
           <div>
-            <h1 className="text-xl font-display font-bold">
+            <h1 className="text-xl font-bold">
               {thread.girl.name}
             </h1>
-            <p className="text-xs text-lavender-muted line-clamp-1">
+            <p className="text-xs text-lavender-muted line-clamp-1 font-sans">
               {thread.girl.bio}
             </p>
           </div>
@@ -116,7 +116,7 @@ export default function ChatDetailPage() {
         {messages.map((message) => (
           <div
             key={message.id}
-            className={`max-w-xl rounded-2xl px-4 py-3 text-sm leading-relaxed ${
+            className={`max-w-xl rounded-2xl px-4 py-3 text-sm leading-relaxed font-sans ${
               message.sender === 'user'
                 ? 'ml-auto bg-hotPink text-white'
                 : 'bg-deep-800 border border-lavender-faint text-lavender'
@@ -135,12 +135,12 @@ export default function ChatDetailPage() {
           <input
             value={content}
             onChange={(event) => setContent(event.target.value)}
-            className="flex-1 rounded-full bg-deep-800 border border-lavender-faint px-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-hotPink"
+            className="flex-1 rounded-full bg-deep-800 border border-lavender-faint px-4 py-3 text-sm font-sans focus:outline-none focus:ring-2 focus:ring-hotPink"
             placeholder="Type your message..."
           />
           <button
             type="submit"
-            className="px-5 py-2.5 rounded-full bg-hotPink text-white text-sm font-semibold"
+            className="px-5 py-2.5 rounded-full bg-hotPink text-white text-sm font-semibold font-sans"
           >
             Send
           </button>

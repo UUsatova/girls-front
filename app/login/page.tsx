@@ -74,7 +74,7 @@ export default function LoginPage() {
       )
       setAccessToken(token.access)
       setRefreshToken(token.refresh)
-      router.push('/account')
+      router.push('/')
     } catch (err) {
       setError('Authentication failed. Check your credentials.')
     } finally {

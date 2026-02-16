@@ -3,7 +3,7 @@
 import React from 'react';
 import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
-import { Home, Compass, MessageSquare, Heart, PlusCircle, Settings, LogOut, Zap } from 'lucide-react';
+import { Home, MessageSquare, LogOut } from 'lucide-react';
 import { clearAuthTokens } from '@/lib/api';
 import { Logo } from '@/components/Logo';
 interface SidebarProps {
@@ -24,27 +24,10 @@ export function Sidebar({
     icon: Home,
     label: 'Dashboard'
   }, {
-    id: 'explore',
-    icon: Compass,
-    label: 'Discover'
-  }, {
     id: 'messages',
     icon: MessageSquare,
     label: 'Chats',
     badge: 3
-  }, {
-    id: 'favorites',
-    icon: Heart,
-    label: 'My Collection'
-  }, {
-    id: 'create',
-    icon: PlusCircle,
-    label: 'Create Persona'
-  }];
-  const bottomItems = [{
-    id: 'settings',
-    icon: Settings,
-    label: 'Preferences'
   }];
   return <motion.aside initial={{
     x: -20,
@@ -52,48 +35,30 @@ export function Sidebar({
   }} animate={{
     x: 0,
     opacity: 1
-  }} className="hidden md:flex flex-col w-64 h-screen fixed left-0 top-0 bg-deep-900 border-r border-lavender-faint z-50">
+  }} className="hidden md:flex flex-col w-64 h-screen fixed left-0 top-0 bg-deep-900 border-r border-hotPink/20 z-50">
       {/* Logo Area */}
       <div className="p-6">
-        <Logo variant="solid" textSize="lg" className="gap-3" />
+        <Logo variant="gradient" textSize="lg" className="gap-3" />
       </div>
 
-      {/* Premium Banner */}
-      <div className="mx-4 mb-6 p-4 rounded-xl bg-gradient-to-r from-purple-deep to-hotPink/20 border border-hotPink/30 relative overflow-hidden group cursor-pointer">
-        <div className="absolute inset-0 bg-hotPink/5 group-hover:bg-hotPink/10 transition-colors" />
-        <div className="relative z-10 flex items-center gap-3">
-          <Zap className="w-5 h-5 text-hotPink fill-hotPink" />
-          <div>
-            <p className="text-sm font-bold text-white">eros Elite</p>
-            <p className="text-xs text-lavender-muted">Unlock all features</p>
-          </div>
-        </div>
-      </div>
 
       {/* Main Navigation */}
       <nav className="flex-1 px-4 space-y-2 overflow-y-auto">
         {menuItems.map(item => {
         const isActive = activeTab === item.id;
         return <button key={item.id} onClick={() => {
-          const routeMap: Record<string, string> = {
-            home: '/',
-            explore: '/discover',
-            messages: '/account',
-            favorites: '/favorites',
-            create: '/create'
-          };
-          if (routeMap[item.id]) {
-            router.push(routeMap[item.id]);
-            return;
-          }
           onTabChange(item.id);
-        }} className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 group relative ${isActive ? 'bg-hotPink/10 text-hotPink' : 'text-lavender-muted hover:bg-purple-deep hover:text-white'}`}>
-              {isActive && <motion.div layoutId="activeNav" className="absolute left-0 w-1 h-6 bg-hotPink rounded-r-full" />}
-              <item.icon className={`w-5 h-5 ${isActive ? 'stroke-[2.5px]' : 'stroke-2'}`} />
-              <span className={`text-sm font-medium ${isActive ? 'font-semibold' : ''}`}>
+        }} className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 group relative ${
+          isActive 
+            ? 'bg-hotPink/10 text-hotPink' 
+            : 'text-lavender-muted hover:bg-purple-deep hover:text-white'
+        }`}>
+              {isActive && <motion.div layoutId="activeNav" className="absolute left-0 w-1 h-6 bg-hotPink rounded-r-full bloom" />}
+              <item.icon className={`w-5 h-5 ${isActive ? 'stroke-[2.5px] bloom' : 'stroke-2'} group-hover:bloom transition-all`} />
+              <span className="text-sm font-medium font-sans">
                 {item.label}
               </span>
-              {item.badge && <span className="ml-auto bg-hotPink text-white text-[10px] font-bold px-2 py-0.5 rounded-full">
+              {item.badge && <span className="ml-auto bg-hotPink text-white text-[10px] font-bold px-2 py-0.5 rounded-full bloom">
                   {item.badge}
                 </span>}
             </button>;
@@ -101,18 +66,10 @@ export function Sidebar({
       </nav>
 
       {/* Bottom Navigation */}
-      <div className="p-4 border-t border-lavender-faint space-y-2">
-        {bottomItems.map(item => <button key={item.id} onClick={() => {
-        if (item.id === 'settings') {
-          router.push('/settings');
-        }
-      }} className="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-lavender-muted hover:bg-purple-deep hover:text-white transition-colors">
-            <item.icon className="w-5 h-5" />
-            <span className="text-sm font-medium">{item.label}</span>
-          </button>)}
-        <button onClick={handleSignOut} className="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-lavender-muted hover:bg-red-500/10 hover:text-red-400 transition-colors">
-          <LogOut className="w-5 h-5" />
-          <span className="text-sm font-medium">Sign Out</span>
+      <div className="p-4 border-t border-hotPink/20">
+        <button onClick={handleSignOut} className="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-lavender-muted hover:bg-red-500/10 hover:text-red-400 transition-colors hover:neon-border group">
+          <LogOut className="w-5 h-5 group-hover:bloom transition-all" />
+          <span className="text-sm font-medium font-sans">Sign Out</span>
         </button>
       </div>
     </motion.aside>;

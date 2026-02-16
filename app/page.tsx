@@ -14,12 +14,16 @@ import { AboutSection } from '@/components/AboutSection'
 import { ChatPreview } from '@/components/ChatPreview'
 import { LiveActionBanner } from '@/components/LiveActionBanner'
 import { LightHeader } from '@/components/LightHeader'
+import { useRouter } from 'next/navigation'
 
 export default function Home() {
+  const router = useRouter()
   const [activeTab, setActiveTab] = useState('home')
   const [showMobileMenu, setShowMobileMenu] = useState(false)
   const [isAuthed, setIsAuthed] = useState<boolean | null>(null)
   const [loading, setLoading] = useState(true)
+  const [chats, setChats] = useState<any[]>([])
+  const [chatsLoading, setChatsLoading] = useState(false)
 
   useEffect(() => {
     let mounted = true
@@ -38,6 +42,151 @@ export default function Home() {
       mounted = false
     }
   }, [])
+
+  useEffect(() => {
+    if (activeTab === 'messages' && isAuthed) {
+      let mounted = true
+      const loadChats = async () => {
+        setChatsLoading(true)
+        try {
+          const data = await api.get<any[]>('/chats/')
+          if (mounted) {
+            // If no chats from API, use mock data
+            if (data && data.length > 0) {
+              setChats(data)
+            } else {
+              setChats([
+                {
+                  id: 1,
+                  girl: {
+                    id: 1,
+                    name: 'ГПЛОИЬТ',
+                    image_url: '/images/girlAi1.png'
+                  },
+                  last_message: {
+                    id: 1,
+                    sender: 'ai',
+                    content: '*blushes softly, feeling a bit shy at Marina Stankevich\'s direct request* Hehe, you\'re so bold!',
+                    created_at: new Date().toISOString()
+                  }
+                },
+                {
+                  id: 2,
+                  girl: {
+                    id: 2,
+                    name: 'Amber',
+                    image_url: '/images/girlAi2.png'
+                  },
+                  last_message: {
+                    id: 2,
+                    sender: 'ai',
+                    content: 'Your gorgeous stepmom who\'s home alone with you...',
+                    created_at: new Date().toISOString()
+                  }
+                },
+                {
+                  id: 3,
+                  girl: {
+                    id: 3,
+                    name: 'Irina',
+                    image_url: '/images/girlAi1.png'
+                  },
+                  last_message: {
+                    id: 3,
+                    sender: 'user',
+                    content: 'Wealthy Russian heiress, accustomed to luxury and...',
+                    created_at: new Date().toISOString()
+                  }
+                },
+                {
+                  id: 4,
+                  girl: {
+                    id: 4,
+                    name: 'Coco',
+                    image_url: '/images/girlAi3.webp'
+                  },
+                  last_message: {
+                    id: 4,
+                    sender: 'ai',
+                    content: 'You posted to Craigslist about the cute blonde in...',
+                    created_at: new Date().toISOString()
+                  }
+                }
+              ])
+            }
+          }
+        } catch (err) {
+          if (mounted) {
+            // Use mock data on error
+            setChats([
+              {
+                id: 1,
+                girl: {
+                  id: 1,
+                  name: 'ГПЛОИЬТ',
+                  image_url: '/images/girlAi1.png'
+                },
+                last_message: {
+                  id: 1,
+                  sender: 'ai',
+                  content: '*blushes softly, feeling a bit shy at Marina Stankevich\'s direct request* Hehe, you\'re so bold!',
+                  created_at: new Date().toISOString()
+                }
+              },
+              {
+                id: 2,
+                girl: {
+                  id: 2,
+                  name: 'Amber',
+                  image_url: '/images/girlAi2.png'
+                },
+                last_message: {
+                  id: 2,
+                  sender: 'ai',
+                  content: 'Your gorgeous stepmom who\'s home alone with you...',
+                  created_at: new Date().toISOString()
+                }
+              },
+              {
+                id: 3,
+                girl: {
+                  id: 3,
+                  name: 'Irina',
+                  image_url: '/images/girlAi1.png'
+                },
+                last_message: {
+                  id: 3,
+                  sender: 'user',
+                  content: 'Wealthy Russian heiress, accustomed to luxury and...',
+                  created_at: new Date().toISOString()
+                }
+              },
+              {
+                id: 4,
+                girl: {
+                  id: 4,
+                  name: 'Coco',
+                  image_url: '/images/girlAi3.webp'
+                },
+                last_message: {
+                  id: 4,
+                  sender: 'ai',
+                  content: 'You posted to Craigslist about the cute blonde in...',
+                  created_at: new Date().toISOString()
+                }
+              }
+            ])
+          }
+        } finally {
+          if (mounted) setChatsLoading(false)
+        }
+      }
+      loadChats()
+      return () => {
+        mounted = false
+      }
+    }
+  }, [activeTab, isAuthed])
 
   // Show loading state
   if (loading || isAuthed === null) {
@@ -171,7 +320,60 @@ export default function Home() {
       </div>
 
       {/* Main Content Area */}
-      <DashboardScreen />
+      {activeTab === 'home' && <DashboardScreen />}
+      {activeTab === 'messages' && (
+        <div className="min-h-screen bg-deep-900 text-white md:pl-64 pb-20 md:pb-0">
+          <div className="p-6 md:p-10 max-w-5xl mx-auto">
+            <div className="flex items-center justify-between mb-8">
+              <div>
+                <h1 className="text-3xl font-bold neon-glow-white mb-1">Your Chats</h1>
+                <p className="text-lavender-muted font-sans">Continue your conversations</p>
+              </div>
+            </div>
+
+            {chatsLoading ? (
+              <div className="text-lavender-muted font-sans">Loading chats...</div>
+            ) : chats.length === 0 ? (
+              <div className="rounded-2xl border border-lavender-faint bg-deep-800 p-8 text-center">
+                <p className="text-lavender-muted mb-4 font-sans">No chats yet.</p>
+                <button
+                  onClick={() => setActiveTab('home')}
+                  className="px-4 py-2 rounded-full gradient-shimmer text-white text-sm font-medium font-sans"
+                >
+                  Browse Profiles
+                </button>
+              </div>
+            ) : (
+              <div className="space-y-4">
+                {chats.map((chat) => (
+                  <div
+                    key={chat.id}
+                    className="flex items-center justify-between p-4 rounded-xl bg-deep-800 border border-cyan/30 hover:border-cyan hover:neon-border transition-all cursor-pointer"
+                    onClick={() => router.push(`/account/chats/${chat.id}`)}
+                  >
+                    <div className="flex items-center gap-4">
+                      <img
+                        src={chat.girl.image_url}
+                        alt={chat.girl.name}
+                        className="w-14 h-14 rounded-full object-cover bloom"
+                      />
+                      <div>
+                        <h3 className="font-semibold text-white font-sans">{chat.girl.name}</h3>
+                        <p className="text-xs text-lavender-muted line-clamp-1 font-sans">
+                          {chat.last_message?.content || 'Start the conversation'}
+                        </p>
+                      </div>
+                    </div>
+                    <button className="px-3 py-1.5 rounded-lg bg-hotPink text-white text-xs hover:scale-105 transition-transform font-sans">
+                      Open
+                    </button>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        </div>
+      )}
 
       {/* Mobile Menu Overlay */}
       {showMobileMenu && (
