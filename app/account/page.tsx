@@ -87,8 +87,8 @@ export default function AccountPage() {
       <div className="max-w-5xl mx-auto space-y-8">
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-3xl font-display font-bold">Personal cabinet</h1>
-            <p className="text-lavender-muted">
+            <h1 className="text-3xl font-bold">Personal cabinet</h1>
+            <p className="text-lavender-muted font-sans">
               {user?.username} · {user?.email || 'no-email'}
             </p>
           </div>
@@ -102,7 +102,7 @@ export default function AccountPage() {
 
         <div className="grid md:grid-cols-3 gap-6">
           <div className="md:col-span-2 rounded-2xl border border-lavender-faint bg-deep-800 p-6">
-            <h2 className="text-xl font-display font-semibold mb-4">Your chats</h2>
+            <h2 className="text-xl font-semibold mb-4">Your chats</h2>
             {chats.length === 0 && (
               <p className="text-sm text-lavender-muted">No chats yet.</p>
             )}
@@ -119,8 +119,8 @@ export default function AccountPage() {
                       className="w-14 h-14 rounded-full object-cover"
                     />
                     <div>
-                      <h3 className="font-semibold">{chat.girl.name}</h3>
-                      <p className="text-xs text-lavender-muted line-clamp-1">
+                      <h3 className="font-semibold font-sans">{chat.girl.name}</h3>
+                      <p className="text-xs text-lavender-muted line-clamp-1 font-sans">
                         {chat.last_message?.content || 'Start the conversation'}
                       </p>
                     </div>
@@ -137,8 +137,8 @@ export default function AccountPage() {
           </div>
 
           <div className="rounded-2xl border border-lavender-faint bg-deep-800 p-6">
-            <h2 className="text-xl font-display font-semibold mb-4">Stats</h2>
-            <div className="space-y-3 text-sm text-lavender-muted">
+            <h2 className="text-xl font-semibold mb-4">Stats</h2>
+            <div className="space-y-3 text-sm text-lavender-muted font-sans">
               <div className="flex items-center justify-between">
                 <span>Total chats</span>
                 <span className="text-white font-semibold">{chats.length}</span>

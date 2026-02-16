@@ -81,10 +81,10 @@ export function DashboardScreen() {
   return (
     <div className="min-h-screen bg-deep-900 text-lavender pb-20 md:pb-0 md:pl-64">
       {/* Mobile Header */}
-      <header className="md:hidden sticky top-0 z-40 bg-deep-900/80 backdrop-blur-lg border-b border-lavender-faint px-4 py-3 flex items-center justify-between">
+      <header className="md:hidden sticky top-0 z-40 bg-deep-900/80 backdrop-blur-lg border-b border-hotPink/20 px-4 py-3 flex items-center justify-between">
         <Logo variant="solid" textSize="sm" className="gap-2" />
-        <button className="p-2 text-lavender hover:text-white">
-          <Bell className="w-5 h-5" />
+        <button className="p-2 text-lavender hover:text-hotPink transition-colors">
+          <Bell className="w-5 h-5 bloom" />
         </button>
       </header>
 
@@ -92,34 +92,34 @@ export function DashboardScreen() {
         {/* Top Bar (Desktop) */}
         <div className="hidden md:flex items-center justify-between mb-8">
           <div>
-            <h1 className="text-3xl font-display font-bold text-white mb-1">
+            <h1 className="text-3xl font-bold neon-glow-white mb-1">
               Good Evening{userName ? `, ${userName}` : ''}
             </h1>
-            <p className="text-lavender-muted">
+            <p className="text-lavender-muted font-sans">
               Ready to connect with someone new?
             </p>
           </div>
           <div className="flex items-center gap-4">
             <div className="relative">
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-lavender-muted" />
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-cyan bloom" />
               <input
                 type="text"
                 placeholder="Search personas..."
                 value={search}
                 onChange={(event) => setSearch(event.target.value)}
-                className="bg-deep-800 border border-lavender-faint rounded-full pl-10 pr-4 py-2.5 text-sm text-white focus:outline-none focus:border-hotPink/50 focus:ring-1 focus:ring-hotPink/50 w-64 transition-all"
+                className="bg-deep-800 border border-cyan/30 rounded-full pl-10 pr-4 py-2.5 text-sm text-white placeholder:text-cyan/40 focus:outline-none focus:border-cyan focus:ring-2 focus:ring-cyan/50 w-64 transition-all neon-border font-sans"
               />
             </div>
-            <button className="p-2.5 rounded-full bg-deep-800 border border-lavender-faint text-lavender hover:text-white hover:border-hotPink/50 transition-colors">
+            <button className="p-2.5 rounded-full bg-deep-800 border border-cyan/30 text-cyan hover:text-white hover:border-cyan transition-all bloom hover:neon-border">
               <Filter className="w-4 h-4" />
             </button>
-            <button className="p-2.5 rounded-full bg-deep-800 border border-lavender-faint text-lavender hover:text-white hover:border-hotPink/50 transition-colors relative">
+            <button className="p-2.5 rounded-full bg-deep-800 border border-hotPink/30 text-hotPink hover:text-white hover:border-hotPink transition-all relative bloom hover:neon-border">
               <Bell className="w-4 h-4" />
-              <span className="absolute top-2 right-2.5 w-2 h-2 bg-hotPink rounded-full border border-deep-900" />
+              <span className="absolute top-2 right-2.5 w-2 h-2 bg-hotPink rounded-full border border-deep-900 bloom" />
             </button>
             <a
               href="/account"
-              className="px-4 py-2.5 rounded-full bg-hotPink text-white text-sm font-medium shadow-lg shadow-hotPink/20"
+              className="px-4 py-2.5 rounded-full gradient-shimmer text-white text-sm font-medium font-sans shadow-lg shadow-hotPink/30 hover:scale-105 transition-transform"
             >
               Account
             </a>
@@ -129,10 +129,10 @@ export function DashboardScreen() {
         {/* Stories/Avatars */}
         <section>
           <div className="flex items-center justify-between mb-4">
-            <h2 className="text-lg font-display font-bold text-white">
+            <h2 className="text-lg font-bold neon-glow-cyan">
               Recent Activity
             </h2>
-            <button className="text-xs font-medium text-cyan hover:text-cyan-hover uppercase tracking-wider">
+            <button className="text-xs font-medium neon-glow-cyan hover:neon-glow-intense uppercase tracking-wider transition-all">
               View All
             </button>
           </div>
@@ -146,10 +146,10 @@ export function DashboardScreen() {
               (tab, i) => (
                 <button
                   key={tab}
-                  className={`px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-all ${
+                  className={`px-4 py-2 rounded-full text-sm font-medium font-sans whitespace-nowrap transition-all ${
                     i === 0
-                      ? 'bg-hotPink text-white shadow-lg shadow-hotPink/20'
-                      : 'bg-deep-800 text-lavender-muted hover:bg-deep-800/80 hover:text-white border border-lavender-faint'
+                      ? 'gradient-shimmer text-white shadow-lg shadow-hotPink/40 hover:scale-105'
+                      : 'bg-deep-800 text-lavender-muted hover:bg-deep-800/80 hover:text-white border border-cyan/30 hover:border-cyan hover:neon-border'
                   }`}
                 >
                   {tab}
@@ -159,9 +159,9 @@ export function DashboardScreen() {
           </div>
 
           {loading && (
-            <div className="text-sm text-lavender-muted">Loading profiles...</div>
+            <div className="text-sm text-lavender-muted font-sans">Loading profiles...</div>
           )}
-          {error && <div className="text-sm text-red-400">{error}</div>}
+          {error && <div className="text-sm text-red-400 font-sans">{error}</div>}
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             {profiles.map((profile, index) => (
