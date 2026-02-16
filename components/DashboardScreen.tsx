@@ -7,6 +7,7 @@ import { ProfileDrawer } from './ProfileDrawer'
 import { Search, Filter, Bell } from 'lucide-react'
 import { api } from '@/lib/api'
 import { Logo } from '@/components/Logo'
+import { useSidebar } from '@/contexts/SidebarContext'
 
 interface GirlProfile {
   id: number
@@ -27,6 +28,7 @@ export function DashboardScreen() {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [selectedProfile, setSelectedProfile] = useState<GirlProfile | null>(null)
+  const { collapsed: sidebarCollapsed } = useSidebar()
 
   useEffect(() => {
     let isMounted = true
@@ -79,7 +81,13 @@ export function DashboardScreen() {
   )
 
   return (
-    <div className="min-h-screen bg-deep-900 text-lavender pb-20 md:pb-0 md:pl-64">
+    <div 
+      className="min-h-screen bg-deep-900 text-lavender pb-20 md:pb-0" 
+      style={{ 
+        paddingLeft: sidebarCollapsed ? '80px' : '256px',
+        transition: 'padding-left 0.3s'
+      }}
+    >
       {/* Mobile Header */}
       <header className="md:hidden sticky top-0 z-40 bg-deep-900/80 backdrop-blur-lg border-b border-hotPink/20 px-4 py-3 flex items-center justify-between">
         <Logo variant="solid" textSize="sm" className="gap-2" />

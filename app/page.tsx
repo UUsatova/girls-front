@@ -14,16 +14,28 @@ import { AboutSection } from '@/components/AboutSection'
 import { ChatPreview } from '@/components/ChatPreview'
 import { LiveActionBanner } from '@/components/LiveActionBanner'
 import { LightHeader } from '@/components/LightHeader'
-import { useRouter } from 'next/navigation'
+import { useRouter, usePathname } from 'next/navigation'
+import { useSidebar } from '@/contexts/SidebarContext'
 
 export default function Home() {
   const router = useRouter()
+  const pathname = usePathname()
   const [activeTab, setActiveTab] = useState('home')
   const [showMobileMenu, setShowMobileMenu] = useState(false)
   const [isAuthed, setIsAuthed] = useState<boolean | null>(null)
   const [loading, setLoading] = useState(true)
   const [chats, setChats] = useState<any[]>([])
   const [chatsLoading, setChatsLoading] = useState(false)
+  const { collapsed: sidebarCollapsed, toggleCollapse } = useSidebar()
+
+  // Sync activeTab with current pathname
+  useEffect(() => {
+    if (pathname?.startsWith('/account')) {
+      setActiveTab('messages')
+    } else if (pathname === '/') {
+      setActiveTab('home')
+    }
+  }, [pathname])
 
   useEffect(() => {
     let mounted = true
@@ -60,7 +72,7 @@ export default function Home() {
                   id: 1,
                   girl: {
                     id: 1,
-                    name: 'ГПЛОИЬТ',
+                    name: 'Eva',
                     image_url: '/images/girlAi1.png'
                   },
                   last_message: {
@@ -123,7 +135,7 @@ export default function Home() {
                 id: 1,
                 girl: {
                   id: 1,
-                  name: 'ГПЛОИЬТ',
+                  name: 'Eva',
                   image_url: '/images/girlAi1.png'
                 },
                 last_message: {
@@ -213,7 +225,12 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-deep-900 text-white font-sans selection:bg-hotPink selection:text-white">
       {/* Desktop Sidebar */}
-      <Sidebar activeTab={activeTab} onTabChange={setActiveTab} />
+      <Sidebar 
+        activeTab={activeTab} 
+        onTabChange={setActiveTab}
+        collapsed={sidebarCollapsed}
+        onToggleCollapse={toggleCollapse}
+      />
 
       {/* Mobile Bottom Nav */}
       <div className="md:hidden fixed bottom-0 left-0 right-0 bg-deep-900/90 backdrop-blur-xl border-t border-lavender-faint z-50 px-6 py-4 flex justify-between items-center">
@@ -322,7 +339,13 @@ export default function Home() {
       {/* Main Content Area */}
       {activeTab === 'home' && <DashboardScreen />}
       {activeTab === 'messages' && (
-        <div className="min-h-screen bg-deep-900 text-white md:pl-64 pb-20 md:pb-0">
+        <div 
+          className="min-h-screen bg-deep-900 text-white pb-20 md:pb-0"
+          style={{ 
+            paddingLeft: sidebarCollapsed ? '80px' : '256px',
+            transition: 'padding-left 0.3s'
+          }}
+        >
           <div className="p-6 md:p-10 max-w-5xl mx-auto">
             <div className="flex items-center justify-between mb-8">
               <div>

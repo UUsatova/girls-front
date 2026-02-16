@@ -4,11 +4,13 @@ import { useEffect, useState } from 'react'
 import { usePathname, useRouter } from 'next/navigation'
 import { Sidebar } from '@/components/Sidebar'
 import { api } from '@/lib/api'
+import { useSidebar } from '@/contexts/SidebarContext'
 
 export function AccountSidebar() {
   const router = useRouter()
   const pathname = usePathname()
   const [activeTab, setActiveTab] = useState('home')
+  const { collapsed, toggleCollapse } = useSidebar()
 
   useEffect(() => {
     let mounted = true
@@ -33,5 +35,10 @@ export function AccountSidebar() {
     }
   }, [pathname])
 
-  return <Sidebar activeTab={activeTab} onTabChange={setActiveTab} />
+  return <Sidebar 
+    activeTab={activeTab} 
+    onTabChange={setActiveTab}
+    collapsed={collapsed}
+    onToggleCollapse={toggleCollapse}
+  />
 }

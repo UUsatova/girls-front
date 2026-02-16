@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import './globals.css'
+import { SidebarProvider } from '@/contexts/SidebarContext'
 
 export const metadata: Metadata = {
   title: 'Eros',
@@ -19,7 +20,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        {children}
+        <SidebarProvider>
+          {children}
+        </SidebarProvider>
         <script
           dangerouslySetInnerHTML={{
             __html: `
